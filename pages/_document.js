@@ -1,5 +1,6 @@
 import Document from "next/document";
 import { ServerStyleSheet } from "styled-components";
+import { Html, Head, Main, NextScript } from "next/document";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -21,5 +22,25 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal();
     }
+  }
+
+  render() {
+    return (
+      <Html>
+        <Head>
+          <meta charSet="utf-8" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }
