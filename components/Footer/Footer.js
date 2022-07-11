@@ -83,10 +83,10 @@ const Footer = () => {
 export default Footer;
 
 const FooterContainer = styled.footer`
-  background: gray;
+  background: #111111;
   width: 100%;
   height: 19rem;
-  color: #ffffff;
+  color: #383838;
 
   hr {
     margin-top: 0.5rem;
