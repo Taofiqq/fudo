@@ -1,31 +1,30 @@
-import prisma from "../../lib/prisma";
-import { createExtraOptions } from "../../utils/extra";
+import prisma from "../../../lib/prisma";
+import { createProductPrice } from "../../../utils/helper";
 
 export default async function handler(req, res) {
   const { method } = req;
 
   if (method === "POST") {
     try {
-      const { text, price, productId } = req.body;
+      const { price, productId } = req.body;
 
-      const extra = await createExtraOptions({
-        text,
+      const productPrice = await createProductPrice({
         price,
         productId,
       });
 
-      res.status(201).json(extra);
+      res.status(201).json(productPrice);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   }
 
   if (method === "GET") {
-    const extras = await prisma.extra.findMany({
+    const products = await prisma.price.findMany({
       include: {
         product: true,
       },
     });
-    res.json(extras);
+    res.json(products);
   }
 }

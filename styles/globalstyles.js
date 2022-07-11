@@ -9,4 +9,8 @@ export const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Nunito Sans', sans-serif;
         }
+
+       li{
+            text-decoration: none;
+        }
 `;

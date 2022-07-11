@@ -1,9 +1,4 @@
-import { createProducts, getAllProducts } from "../../../utils/product";
-
-// export default async function handler(req, res) {
-//   const data = await getAllProducts();
-//   res.json(data);
-// }
+import { createProducts, getAllProducts } from "../../../utils/helper";
 
 export default async function handlers(req, res) {
   const { method } = req;
