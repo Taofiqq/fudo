@@ -1,7 +1,17 @@
 import Head from "next/head";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
-export default function Home() {
+const initialValues = {
+  name: "",
+  price: 0,
+  quantity: 0,
+};
+
+export default function Home({ products }) {
+  console.log("products", products);
   return (
     <div>
       <Head>
@@ -12,6 +22,33 @@ export default function Home() {
 
       <p>Fudo App</p>
       <AiOutlineShoppingCart />
+      {products.map((product) => (
+        <div key={product.id}>
+          <h1>{product.title}</h1>
+          <h2>{product.description}</h2>
+          <Image
+            src={product.productImg}
+            width={200}
+            height={200}
+            alt="prod img"
+          />
+        </div>
+      ))}
+      {/* <Image
+        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3099&q=80"
+        width={300}
+        height={300}
+        alt="Fudo"
+      /> */}
     </div>
   );
 }
+
+export const getServerSideProps = async () => {
+  const { data } = await axios.get("http://localhost:3001/api/products");
+  return {
+    props: {
+      products: data,
+    },
+  };
+};
