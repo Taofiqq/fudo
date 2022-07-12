@@ -15,7 +15,6 @@ export default function Home() {
     return response.data;
   };
   const { data, error } = useSWR("/api/products", fetcher);
-  // console.log(data);
   return (
     <div>
       <Head>
