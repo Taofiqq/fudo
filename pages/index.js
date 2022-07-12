@@ -30,12 +30,16 @@ export default function Home() {
         <div key={product.id}>
           <p>{product.title}</p>
           <p>{product.description}</p>
-          <Image
-            src={product.productImg}
-            width={200}
-            height={200}
-            alt="product"
-          />
+          <Link href={`/product/${data.id}`}>
+            <a>
+              <Image
+                src={product.productImg}
+                width={200}
+                height={200}
+                alt="product"
+              />
+            </a>
+          </Link>
         </div>
       ))}
       <Footer />
