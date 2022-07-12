@@ -38,13 +38,3 @@ model Extra {
   product   Product? @relation(fields: [productId], references: [id])
   productId String 
 }
-
-model Order {
-  id        Int @id @default(autoincrement())
-  customer  String @db.VarChar(255)
-  address String     @db.VarChar(255)
-  total Int
-  status Int 
-  method Int
-  createdAt DateTime @default(now())
-}
