@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ProductList = ({ data }) => {
-  // console.log(data.prices, "data");
+  console.log(data, "data");
   return (
     <div>
       <p>{data.title}</p>

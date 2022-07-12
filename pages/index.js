@@ -15,6 +15,7 @@ export default function Home() {
     return response.data;
   };
   const { data, error } = useSWR("/api/products", fetcher);
+  console.log("index", data);
   return (
     <div>
       <Head>
@@ -23,7 +24,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ProductCard data={data} />
+      {/* <ProductCard data={data} /> */}
+
+      {data?.map((product) => (
+        <div key={product.id}>
+          <p>{product.title}</p>
+          <p>{product.description}</p>
+          <Image
+            src={product.productImg}
+            width={200}
+            height={200}
+            alt="product"
+          />
+        </div>
+      ))}
       <Footer />
     </div>
   );
