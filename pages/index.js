@@ -6,8 +6,16 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer/Footer";
+import useSWR from "swr";
 
-export default function Home({ products }) {
+/** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
+export default function Home() {
+  const fetcher = async (url) => {
+    const response = await axios.get(url);
+    return response.data;
+  };
+  const { data, error } = useSWR("/api/products", fetcher);
+  // console.log(data);
   return (
     <div>
       <Head>
@@ -16,18 +24,18 @@ export default function Home({ products }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ProductCard data={products} />
+      <ProductCard data={data} />
       <Footer />
     </div>
   );
 }
 
-export const getServerSideProps = async () => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const { data } = await axios.get(`${baseUrl}/api/products`);
-  return {
-    props: {
-      products: data,
-    },
-  };
-};
+// export const getServerSideProps = async () => {
+//   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+//   const { data } = await axios.get(`${baseUrl}/api/products`);
+//   return {
+//     props: {
+//       products: data,
+//     },
+//   };
+// };
