@@ -7,11 +7,13 @@ import {
   BsInstagram,
   BsYoutube,
 } from "react-icons/bs";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <FooterContainer>
       <Newsletter>
+        <Image src="/logo.png" width={50} height={50} alt="logo" />
         <h1>Fudo</h1>
         <p>Stay up to Date with our delicious meals</p>
         <form action="">
