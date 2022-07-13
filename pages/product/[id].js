@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import useSWR from "swr";
-import { useProductId } from "../../utils/fetcher";
+import { useFetchProductById, useProductId } from "../../utils/fetcher";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import LoaderSpinner from "../../components/LoaderSpinner";
@@ -10,12 +10,7 @@ import LoaderSpinner from "../../components/LoaderSpinner";
 const Product = () => {
   const router = useRouter();
   const { id } = router.query;
-  const fetcher = async (url) => {
-    const response = await axios.get(url);
-    return response.data;
-  };
-  const { data, error } = useSWR(`/api/products/${id}`, fetcher);
-
+  const { data, error } = useFetchProductById(id);
   if (error) return <div>failed to load</div>;
   if (!data) return <LoaderSpinner />;
 
