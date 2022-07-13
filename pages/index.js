@@ -7,14 +7,17 @@ import Link from "next/link";
 import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer/Footer";
 import useSWR from "swr";
+import LoaderSpinner from "../components/LoaderSpinner";
 
-/** @param {import('next').InferGetServerSidePropsType<typeof getServerSideProps> } props */
 export default function Home() {
   const fetcher = async (url) => {
     const response = await axios.get(url);
     return response.data;
   };
   const { data, error } = useSWR("/api/products", fetcher);
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <LoaderSpinner />;
   console.log("index", data);
   return (
     <div>
@@ -30,7 +33,7 @@ export default function Home() {
         <div key={product.id}>
           <p>{product.title}</p>
           <p>{product.description}</p>
-          <Link href={`/product/${data.id}`}>
+          <Link href={`/product/${product.id}`}>
             <a>
               <Image
                 src={product.productImg}
@@ -46,13 +49,3 @@ export default function Home() {
     </div>
   );
 }
-
-// export const getServerSideProps = async () => {
-//   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-//   const { data } = await axios.get(`${baseUrl}/api/products`);
-//   return {
-//     props: {
-//       products: data,
-//     },
-//   };
-// };

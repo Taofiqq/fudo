@@ -2,33 +2,31 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import useSWR from "swr";
+import { useProductId } from "../../utils/fetcher";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import LoaderSpinner from "../../components/LoaderSpinner";
 
 const Product = () => {
-  // const fetcher = async (url) => {
-  //   const response = await axios.get(url);
-  //   return response.data;
-  // };
-  // const { data, error, params } = useSWR(`/api/products/${params.id}`, fetcher);
-  // console.log(data, "data img");
+  const router = useRouter();
+  const { id } = router.query;
+  const fetcher = async (url) => {
+    const response = await axios.get(url);
+    return response.data;
+  };
+  const { data, error } = useSWR(`/api/products/${id}`, fetcher);
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <LoaderSpinner />;
+
+  console.log(id, "id", "data", data);
   return (
     <div>
-      {/* <h1>{data.title}</h1>
+      <h1>{data.title}</h1>
       <Image src={data.productImg} width={200} height={200} alt="product" />
-      <p>{data.description}</p> */}
-
-      <h1>heyyy</h1>
+      <p>{data.description}</p>
     </div>
   );
 };
 
 export default Product;
-
-// export const getServerSideProps = async ({ params }) => {
-//   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-//   const { data } = await axios.get(`${baseUrl}/api/products/${params.id}`);
-//   return {
-//     props: {
-//       data: data,
-//     },
-//   };
-// };
