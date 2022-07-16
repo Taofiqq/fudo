@@ -8,7 +8,8 @@ export default async function handler(req, res) {
       const { id } = req.query;
       const product = await deleteProducts(id);
 
-      res.status(201).json({
+      res.status(200).json({
+        status: "success",
         message: "Product deleted successfully",
         product,
       });
@@ -22,7 +23,35 @@ export default async function handler(req, res) {
       where: {
         id: id,
       },
+      include: {
+        prices: true,
+        extras: true,
+      },
     });
-    res.json(product);
+    res.status(200).json({
+      status: "success",
+      message: "Product Fetched Successfully",
+      product,
+    });
+  }
+
+  if (method === "PUT") {
+    const { id } = req.query;
+    const { title, description, productImg } = req.body;
+    const product = await prisma.product.update({
+      where: {
+        id: id,
+      },
+      data: {
+        title,
+        description,
+        productImg,
+      },
+    });
+    res.status(200).json({
+      status: "success",
+      message: "Product Updated Successfully",
+      product,
+    });
   }
 }

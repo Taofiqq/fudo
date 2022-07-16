@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import Footer from "../components/Footer/Footer";
 import LoaderSpinner from "../components/LoaderSpinner";
 import { useFetchAllProducts } from "../utils/fetcher";
 
@@ -10,7 +9,8 @@ export default function Home() {
 
   if (error) return <div>failed to load</div>;
   if (!data) return <LoaderSpinner />;
-  console.log("products", data);
+  console.log("products", data.products);
+
   return (
     <div>
       <Head>
@@ -19,7 +19,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {data?.map((product) => (
+      {data.products.map((product) => (
         <div key={product.id}>
           <p>{product.title}</p>
           <p>{product.description}</p>
@@ -35,7 +35,6 @@ export default function Home() {
           </Link>
         </div>
       ))}
-      <Footer />
     </div>
   );
 }

@@ -13,7 +13,11 @@ export default async function handlers(req, res) {
         productImg,
       });
 
-      res.status(201).json(product);
+      res.status(200).json({
+        status: "success",
+        message: "Product created successfully",
+        product,
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -21,6 +25,10 @@ export default async function handlers(req, res) {
 
   if (method === "GET") {
     const products = await getAllProducts();
-    res.json(products);
+    res.status(200).json({
+      status: "success",
+      message: "Products Fetched Successfully",
+      products,
+    });
   }
 }
