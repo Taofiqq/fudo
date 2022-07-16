@@ -68,3 +68,12 @@ export const deleteExtraOptions = async (id) => {
   });
   return extra;
 };
+
+// create orders
+
+export const createOrders = async (orders) => {
+  const newOrders = await prisma.order.create({
+    data: orders,
+  });
+  return newOrders;
+};
