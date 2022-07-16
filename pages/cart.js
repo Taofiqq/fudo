@@ -10,6 +10,8 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { reset } from "../redux/cartSlice";
 import CashPaymentModal from "../components/CashPaymentModal";
+import Flutterwave from "../integrations/Flutterwave/Flutterwave";
+import Paystack from "../integrations/Paystack/Paystack";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -167,6 +169,8 @@ const Cart = () => {
             >
               <ButtonWrapper currency={currency} showSpinner={false} />
             </PayPalScriptProvider>
+            <Flutterwave />
+            <Paystack />
           </div>
         ) : (
           <button onClick={() => setOpen(!false)}>Proceed to Checkout</button>
