@@ -9,13 +9,15 @@ import LoaderSpinner from "../../components/LoaderSpinner";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartSlice";
 
-const Product = () => {
+const Product = ({ datas }) => {
+  console.log(datas);
+  const { product } = datas;
+  console.log("pricee", product.prices);
   const router = useRouter();
 
   const { id } = router.query;
 
   const { data, error } = useFetchProductById(id);
-  // console.log(data);
 
   let productPrice = [];
 
@@ -23,7 +25,15 @@ const Product = () => {
     productPrice.push(price.price);
   });
 
-  const [price, setPrice] = useState(productPrice[0]);
+  let newProductPrice = [];
+
+  product?.prices.map((price) => {
+    newProductPrice.push(price.price);
+  });
+
+  console.log(newProductPrice);
+
+  const [price, setPrice] = useState(newProductPrice[0]);
   const [size, setSize] = useState(0);
   const [extras, setExtras] = useState([]);
   const [quantity, setQuantity] = useState(1);
@@ -57,9 +67,6 @@ const Product = () => {
   if (error) return <div>failed to load</div>;
   if (!data) return <LoaderSpinner />;
 
-  // console.log("data", data.product.prices);
-  // console.log("extras", extras);
-  console.log("productPrice", productPrice);
   return (
     <div>
       <h1>{data.product.title}</h1>
@@ -121,13 +128,13 @@ const Product = () => {
 
 export default Product;
 
-// export const getServerSideProps = async ({ params }) => {
-//   const { data } = await axios.get(
-//     `http://localhost:3000/api/products/${params.id}`
-//   );
-//   return {
-//     props: {
-//       fetchedData: data,
-//     },
-//   };
-// };
+export const getServerSideProps = async ({ params }) => {
+  const { data } = await axios.get(
+    `http://localhost:3000/api/products/${params.id}`
+  );
+  return {
+    props: {
+      datas: data,
+    },
+  };
+};

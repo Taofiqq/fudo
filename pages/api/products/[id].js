@@ -1,4 +1,8 @@
-import { deleteProducts } from "../../../utils/helper";
+import {
+  deleteProductById,
+  getProductById,
+  updateProductById,
+} from "../../../helpers/products/products";
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -6,12 +10,12 @@ export default async function handler(req, res) {
   if (method === "DELETE") {
     try {
       const { id } = req.query;
-      const product = await deleteProducts(id);
+      const deletedProduct = await deleteProductById(id);
 
       res.status(200).json({
         status: "success",
         message: "Product deleted successfully",
-        product,
+        deletedProduct,
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -19,39 +23,39 @@ export default async function handler(req, res) {
   }
   if (method === "GET") {
     const { id } = req.query;
-    const product = await prisma.product.findUnique({
-      where: {
-        id: id,
-      },
-      include: {
-        prices: true,
-        extras: true,
-      },
-    });
-    res.status(200).json({
-      status: "success",
-      message: "Product Fetched Successfully",
-      product,
-    });
+
+    try {
+      const product = await getProductById(id);
+      if (!product) {
+        res.status(404).json({
+          status: "fail",
+          message: "Product not found",
+        });
+      }
+      res.status(200).json({
+        status: "success",
+        message: "Product Fetched Successfully",
+        product,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
 
   if (method === "PUT") {
     const { id } = req.query;
     const { title, description, productImg } = req.body;
-    const product = await prisma.product.update({
-      where: {
-        id: id,
-      },
-      data: {
-        title,
-        description,
-        productImg,
-      },
+
+    const updatedProduct = await updateProductById(id, {
+      title,
+      description,
+      productImg,
     });
+
     res.status(200).json({
       status: "success",
       message: "Product Updated Successfully",
-      product,
+      updatedProduct,
     });
   }
 }

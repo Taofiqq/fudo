@@ -1,5 +1,9 @@
 import prisma from "../../../lib/prisma";
-import { createOrders } from "../../../utils/helper";
+import {
+  createOrders,
+  deleteManyOrders,
+  getAllOrders,
+} from "../../../helpers/orders/orders";
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -23,7 +27,33 @@ export default async function handler(req, res) {
   }
 
   if (method === "GET") {
-    const products = await prisma.order.findMany();
-    res.json(products);
+    const orders = await getAllOrders();
+
+    if (orders.length < 0) {
+      res.status(404).json({
+        status: "fail",
+        message: "No orders found",
+      });
+    } else {
+      res.json({
+        status: "success",
+        message: "Orders fetched successfully",
+        orders,
+      });
+    }
+  }
+
+  // delete all orders
+  if (method === "DELETE") {
+    try {
+      const orders = await deleteManyOrders();
+      res.status(200).json({
+        status: "success",
+        message: "Orders Deleted Successfully",
+        orders,
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
 }

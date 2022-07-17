@@ -1,4 +1,7 @@
-import { createProducts, getAllProducts } from "../../../utils/helper";
+import {
+  createProducts,
+  getAllProducts,
+} from "../../../helpers/products/products";
 
 export default async function handlers(req, res) {
   const { method } = req;
@@ -13,7 +16,7 @@ export default async function handlers(req, res) {
         productImg,
       });
 
-      res.status(200).json({
+      res.status(201).json({
         status: "success",
         message: "Product created successfully",
         product,

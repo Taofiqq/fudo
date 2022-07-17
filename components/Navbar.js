@@ -1,24 +1,34 @@
 import Link from "next/link";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useSelector } from "react-redux";
-
+import styles from "../styles/Navbar.module.css";
+import Image from "next/image";
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
   return (
-    <div>
-      <nav>
-        <Link href="/">
-          <h1>Fudo</h1>
-        </Link>
+    <nav className={styles.container}>
+      <Link href="/">
+        <div className={styles.logoContainer}>
+          <Image src="/logo.png" width={50} height={50} alt="Fudo Logo" />
+          <h1 className={styles.logoTitle}>Fudo</h1>
+        </div>
+      </Link>
 
-        <Link href="/cart">
-          <div>
-            <AiOutlineShoppingCart />
-            <div>{quantity}</div>
+      <Link href="/cart">
+        <div className={styles.contents}>
+          <ul className={styles.contentList}>
+            <li className={styles.contentItem}>Resturants</li>
+            <li className={styles.contentItem}>Products</li>
+            <li className={styles.contentItem}>About</li>
+            <li className={styles.contentItem}>Contact</li>
+          </ul>
+          <div className={styles.cart}>
+            <AiOutlineShoppingCart className={styles.cartIcon} />
+            <div className={styles.cartQuantity}>{quantity}</div>
           </div>
-        </Link>
-      </nav>
-    </div>
+        </div>
+      </Link>
+    </nav>
   );
 };
 

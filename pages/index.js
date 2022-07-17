@@ -7,9 +7,13 @@ import { useFetchAllProducts } from "../utils/fetcher";
 export default function Home() {
   const { data, error } = useFetchAllProducts();
 
-  if (error) return <div>failed to load</div>;
+  if (error)
+    return (
+      <div>Ooops, Failed to fetch Resource. Dont worry we will be back</div>
+    );
   if (!data) return <LoaderSpinner />;
-  console.log("products", data.products);
+  const { products } = data;
+  console.log("products", products);
 
   return (
     <div>
@@ -19,7 +23,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {data.products.map((product) => (
+      {products.map((product) => (
         <div key={product.id}>
           <p>{product.title}</p>
           <p>{product.description}</p>

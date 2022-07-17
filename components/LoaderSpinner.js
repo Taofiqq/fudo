@@ -2,16 +2,25 @@ import React from "react";
 import styled from "styled-components";
 
 const LoaderSpinner = () => {
-  return <Spinner></Spinner>;
+  return (
+    <SpinnerContainer>
+      <Spinner></Spinner>
+    </SpinnerContainer>
+  );
 };
 
 export default LoaderSpinner;
 
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const Spinner = styled.div`
   width: 30px;
   height: 30px;
-  border: 10px solid #f3f3f3; /* Light grey */
-  border-top: 10px solid #383636; /* Black */
+  border: 2px solid #f3f3f3; /* Light grey */
+  border-top: 1px solid #1b2430; /* Black */
   border-radius: 50%;
   display: flex;
   justify-content: center;
