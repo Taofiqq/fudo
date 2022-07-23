@@ -27,6 +27,28 @@ export default async function handler(req, res) {
     }
   }
 
+  if (method === "PUT") {
+    // update order by id
+    const { id } = req.query;
+    const { status } = req.body;
+    try {
+      const order = await prisma.order.update({
+        where: {
+          id: id,
+        },
+        data: {
+          status: status,
+        },
+      });
+      res.status(200).json({
+        status: "success",
+        message: "Order Updated Successfully",
+        order,
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
   if (method === "DELETE") {
     // delete order by id
     const { id } = req.query;

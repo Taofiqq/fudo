@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 
-const Orders = ({ data }) => {
+const Order = ({ data }) => {
   const status = 0;
 
   const statusClass = (index) => {
@@ -60,7 +60,7 @@ const Orders = ({ data }) => {
   );
 };
 
-export default Orders;
+export default Order;
 
 export const getServerSideProps = async ({ params }) => {
   const { id } = params;

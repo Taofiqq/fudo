@@ -1,12 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
+import styles from "../../styles/Flutterwave.module.css";
 
 const Flutterwave = () => {
+  const amount = useSelector((state) => state.cart.total);
+  console.log(amount, "flutter");
   const config = {
     public_key: "FLWPUBK_TEST-ff8cfc219a3d59782d7f38a2c57c93c6-X",
     tx_ref: Date.now(),
-    amount: 100,
-    currency: "NGN",
+    amount: amount,
+    currency: "USD",
     payment_options: "card,mobilemoney,ussd",
     customer: {
       email: "user@gmail.com",
@@ -33,6 +37,7 @@ const Flutterwave = () => {
             onClose: () => {},
           });
         }}
+        className={styles.btn}
       >
         Payment with Flutterwave
       </button>

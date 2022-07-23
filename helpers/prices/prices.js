@@ -1,20 +1,28 @@
 import prisma from "../../lib/prisma";
 
 // endpoint to create product prices
-export const createProductPrice = async (productPrice) => {
-  const price = await prisma.price.create({
-    data: productPrice,
+export const createProductPrice = async (req, res) => {
+  const { price, productId } = req.body;
+  const prices = await prisma.price.create({
+    data: {
+      price,
+      productId,
+    },
   });
-  return price;
+  res.status(201).json(prices);
 };
 
-export const getAllPrices = async () => {
+export const getAllPrices = async (req, res) => {
   const prices = await prisma.price.findMany({
     include: {
       product: true,
     },
   });
-  return prices;
+  res.json({
+    status: "success",
+    message: "Prices fetched successfully",
+    prices,
+  });
 };
 export const getProductPriceById = (id) => {
   const price = prisma.price.findUnique({
@@ -28,7 +36,7 @@ export const getProductPriceById = (id) => {
   return price;
 };
 
-export const updateProductPrice = (id, price) => {
+export const updateProductPriceById = (id, price) => {
   const updatedPrice = prisma.price.update({
     where: {
       id: id,
@@ -39,16 +47,24 @@ export const updateProductPrice = (id, price) => {
 };
 
 // delete all Prices
-export const deleteAllPrices = async () => {
+export const deleteAllPrices = async (req, res) => {
   const deletedPrices = await prisma.price.deleteMany({});
-  return deletedPrices;
+  res.status(200).json({
+    status: "success",
+    message: "Prices Deleted Successfully",
+    deletedPrices,
+  });
 };
 // endpoint to delete product prices
-export const deleteProductPriceById = async (id) => {
+export const deleteProductPriceById = async (req, res) => {
+  const { id } = req.query;
   const productPrice = await prisma.price.delete({
     where: {
       id,
     },
   });
-  return productPrice;
+  res.status(201).json({
+    message: "Price deleted successfully",
+    productPrice,
+  });
 };

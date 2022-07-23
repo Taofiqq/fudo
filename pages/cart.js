@@ -216,7 +216,7 @@ const TableContainer = styled.table`
 
   thead {
     tr {
-      background-color: #009879;
+      background-color: #000000;
       color: #ffffff;
       text-align: left;
       font-weight: bold;

@@ -17,8 +17,12 @@ const Navbar = () => {
       <Link href="/cart">
         <div className={styles.contents}>
           <ul className={styles.contentList}>
-            <li className={styles.contentItem}>Resturants</li>
-            <li className={styles.contentItem}>Products</li>
+            <Link href="/orders">
+              <li className={styles.contentItem}>Orders</li>
+            </Link>
+            <Link href="/admin">
+              <li className={styles.contentItem}>Admin</li>
+            </Link>
             <li className={styles.contentItem}>About</li>
             <li className={styles.contentItem}>Contact</li>
           </ul>

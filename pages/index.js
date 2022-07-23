@@ -31,8 +31,8 @@ export default function Home() {
             <a>
               <Image
                 src={product.productImg}
-                width={200}
-                height={200}
+                width={300}
+                height={300}
                 alt="product"
               />
             </a>

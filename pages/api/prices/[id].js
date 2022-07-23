@@ -1,25 +1,13 @@
-// import {
-//   deleteProductPrice,
-//   getProductPriceById,
-//   updateProductById,
-// } from "../../../utils/helper";
-
 import {
   deleteProductPriceById,
   getProductPriceById,
-  updateProductPrice,
+  updateProductPriceById,
 } from "../../../helpers/prices/prices";
 
 export default async function handler(req, res) {
   const { method } = req;
   if (method === "DELETE") {
-    const { id } = req.query;
-    const product = await deleteProductPriceById(id);
-
-    res.status(201).json({
-      message: "Price deleted successfully",
-      product,
-    });
+    await deleteProductPriceById(req, res);
   }
 
   if (method === "GET") {
@@ -41,7 +29,7 @@ export default async function handler(req, res) {
   if (method === "PUT") {
     const { id } = req.query;
     const { price } = req.body;
-    const updatedProduct = await updateProductPrice(id, {
+    const updatedProduct = await updateProductPriceById(id, {
       price,
     });
     res.status(200).json({
