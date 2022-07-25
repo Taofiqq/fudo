@@ -26,22 +26,22 @@ const Flutterwave = () => {
 
   const handleFlutterPayment = useFlutterwave(config);
   return (
-    <div>
-      <button
-        onClick={() => {
-          handleFlutterPayment({
-            callback: (response) => {
-              console.log(response);
-              closePaymentModal(); // this will close the modal programmatically
-            },
-            onClose: () => {},
-          });
-        }}
-        className={styles.btn}
-      >
-        Payment with Flutterwave
-      </button>
-    </div>
+    // <div>
+    <button
+      onClick={() => {
+        handleFlutterPayment({
+          callback: (response) => {
+            console.log(response);
+            closePaymentModal(); // this will close the modal programmatically
+          },
+          onClose: () => {},
+        });
+      }}
+      className={styles.btn}
+    >
+      Payment with Flutterwave
+    </button>
+    // </div>
   );
 };
 

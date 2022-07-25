@@ -7,23 +7,25 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import LoaderSpinner from "../../components/LoaderSpinner";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../../redux/cartSlice";
+import { addProduct, reset } from "../../redux/cartSlice";
+import styles from "../../styles/Product.module.css";
+import ButtonSize from "../../components/ButtonSize";
+import toast, { Toaster } from "react-hot-toast";
 
-const Product = ({ datas }) => {
-  console.log(datas);
-  const { product } = datas;
-  console.log("pricee", product.prices);
+const Product = ({ data }) => {
+  const { product } = data;
+  console.log(product);
   const router = useRouter();
 
   const { id } = router.query;
 
-  const { data, error } = useFetchProductById(id);
+  // const { data, error } = useFetchProductById(id);
 
-  let productPrice = [];
+  // let productPrice = [];
 
-  data?.product.prices.forEach((price) => {
-    productPrice.push(price.price);
-  });
+  // data?.product.prices.forEach((price) => {
+  //   productPrice.push(price.price);
+  // });
 
   let newProductPrice = [];
 
@@ -62,79 +64,100 @@ const Product = ({ datas }) => {
 
   const handleAddToCart = () => {
     dispatch(addProduct({ ...data.product, quantity, price, extras }));
+    toast.success("Item Added to cart", {
+      position: "top-center",
+      duration: 3000,
+    });
+    reset();
   };
 
-  if (error) return <div>failed to load</div>;
-  if (!data) return <LoaderSpinner />;
+  // if (error) return <div>failed to load</div>;
+  // if (!data) return <LoaderSpinner />;
 
   return (
-    <div>
-      <h1>{data.product.title}</h1>
-      <Image
-        src={data.product.productImg}
-        width={200}
-        height={200}
-        alt="product"
-      />
-      <p>{data.product.description}</p>
-
-      <p>Choose the price</p>
-      <hr />
-      <span>${price}</span>
-      <div>
-        <div onClick={() => handleSize(0)}>
-          <p>Small</p>
-        </div>
-        <div onClick={() => handleSize(1)}>
-          <p>Medium</p>
-        </div>
-        <div onClick={() => handleSize(2)}>
-          <p>Large</p>
-        </div>
-      </div>
-      <hr />
-
-      <p>Chooose additional ingridients</p>
-
-      <div>
-        {data.product.extras.map((extra) => (
-          <div key={extra.id}>
-            <input
-              type="checkbox"
-              id={extra.text}
-              name={extra.text}
-              onChange={(e) => handleChange(e, extra)}
-            />
-            <label htmlFor="">{extra.text}</label>
-            {/* <p>{extra.price}</p> */}
-          </div>
-        ))}
-      </div>
-
-      <div>
-        <input
-          type="number"
-          onChange={(e) => setQuantity(e.target.value)}
-          defaultValue={1}
-          name=""
-          id=""
+    <main className={styles.productContainer}>
+      <div className={styles.left}>
+        <Image
+          src={data.product.productImg}
+          width={600}
+          height={400}
+          alt="product"
+          objectFit="contain"
+          priority
         />
       </div>
+      <div className={styles.right}>
+        <h1>{data.product.title}</h1>
+        <p>{data.product.description}</p>
+        <p>Choose your preferred size</p>
+        <div className={styles.size}>
+          <div onClick={() => handleSize(0)}>
+            <ButtonSize text={"Small size"} />
+          </div>
+          <div onClick={() => handleSize(1)}>
+            <ButtonSize text={"Medium size"} />
+          </div>
+          <div onClick={() => handleSize(2)}>
+            <ButtonSize text={"Large size"} />
+          </div>
+          <div onClick={() => handleSize(3)}>
+            <ButtonSize text={" Extra Large size"} />
+          </div>
+        </div>
+        <div className={styles.extraContainer}>
+          <p>Chooose additional Ingridients</p>
+          <div className={styles.extras}>
+            {data.product.extras.map((extra) => (
+              <div key={extra.id} className={styles.extra}>
+                <input
+                  type="checkbox"
+                  id={extra.text}
+                  name={extra.text}
+                  onChange={(e) => handleChange(e, extra)}
+                  className={styles.checkbox}
+                />
+                <button className={styles.extraButton}>
+                  {extra.text} +${extra.price}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
 
-      <button onClick={handleAddToCart}>Add to Cart</button>
-    </div>
+        <span className={styles.productPrice}>${price}</span>
+
+        <div>
+          <input
+            type="number"
+            onChange={(e) => setQuantity(e.target.value)}
+            defaultValue={1}
+            className={styles.quantity}
+          />
+        </div>
+        <button onClick={handleAddToCart} className={styles.buttonCart}>
+          Add to Cart
+        </button>
+        <Toaster />
+      </div>
+    </main>
   );
 };
 
 export default Product;
 
 export const getServerSideProps = async ({ params }) => {
-  const { data } = await axios.get(
-    `http://localhost:3000/api/products/${params.id}`
-  );
+  const url =
+    process.env.NODE_ENV === "development"
+      ? `http://localhost:3000/api/products/${params.id}`
+      : `${process.env.VERCEL_URL}/api/products/${params.id}`;
+
+  const { data } = await axios.get(url);
+  // const { data } = await axios.get(
+  //   `http://localhost:3000/api/products/${params.id}`
+  // );
   return {
     props: {
-      datas: data,
+      data: data,
     },
   };
 };

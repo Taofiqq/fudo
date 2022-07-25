@@ -7,7 +7,7 @@
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: #000000;
+  background-color: transparent;
   padding: 0.5rem 2rem;
 }
 
@@ -51,7 +51,7 @@
   position: absolute;
   /* background-color: #d8e9a8; */
   color: #ff4c29;
-  top: -0.3rem;
+  top: 0.3rem;
   right: -0.05rem;
   font-size: 0.8rem;
   padding: 0.1rem 0.2rem;

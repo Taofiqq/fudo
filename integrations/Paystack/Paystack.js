@@ -13,9 +13,9 @@ const Paystack = () => {
     email: "tao@gmail.com",
   };
   return (
-    <div>
-      <PaystackButton {...componentProps} className={styles.btn} />
-    </div>
+    // <div>
+    <PaystackButton {...componentProps} className={styles.btn} />
+    // </div>
   );
 };
 

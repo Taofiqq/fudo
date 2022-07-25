@@ -1,9 +1,13 @@
 .btn {
-  background-color: #00bcd4;
-  border: none;
-  outline: none;
   width: 50%;
-  height: 2rem;
-  border-radius: 0.5rem;
-  /* padding: 2rem; */
+  height: 50px;
+  background-color: #009879;
+  border-radius: 5px;
+  border: none;
+  color: #d8d8d8;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 1.5rem;
 }

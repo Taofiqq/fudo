@@ -12,7 +12,8 @@ import { reset } from "../redux/cartSlice";
 import CashPaymentModal from "../components/CashPaymentModal";
 import Flutterwave from "../integrations/Flutterwave/Flutterwave";
 import Paystack from "../integrations/Paystack/Paystack";
-import styled from "styled-components";
+import styles from "../styles/Cart.module.css";
+import ButtonSize from "../components/ButtonSize";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -22,7 +23,6 @@ const Cart = () => {
   const currency = "USD";
   const style = { layout: "vertical" };
   const dispatch = useDispatch();
-  console.log("cart", cart.products);
   const router = useRouter();
   const createOrder = async (data) => {
     try {
@@ -99,101 +99,100 @@ const Cart = () => {
     );
   };
   return (
-    <div>
-      <h1
-        style={{
-          textAlign: "center",
-        }}
-      >
-        Cart Orders
-      </h1>
+    <div className={styles.cartContainer}>
+      <h1 className={cart.title}>Cart Orders</h1>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <TableContainer>
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Extras</th>
-              <th>Quantity</th>
-              <th>Total</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {cart.products.map((product) => (
-              <tr key={product.id}>
-                <td>
-                  <div>
-                    <Image
-                      src={product.productImg}
-                      alt="product img"
-                      width={50}
-                      height={50}
-                    />
-                  </div>
-                </td>
-                <td>{product.title}</td>
-                <td>{product.price}</td>
-                <td>
-                  <span>
-                    {product.extras.map((extra) => (
-                      <span key={extra.id}>{extra.text}</span>
-                    ))}
-                  </span>
-                </td>
-                <td>{product.quantity}</td>
-                <td>{product.price * product.quantity}</td>
-                <td>
-                  <button onClick={deletedProduct}>Delete Item</button>
-                </td>
+      <div className={styles.cartWrapper}>
+        <div className={styles.cartTableContainer}>
+          <table className={styles.table}>
+            <thead className={styles.tableHead}>
+              <tr className={styles.tableRow}>
+                <th className={styles.tableHeadData}>Product</th>
+                <th className={styles.tableHeadData}>Name</th>
+                <th className={styles.tableHeadData}>Price</th>
+                <th className={styles.tableHeadData}>Extras</th>
+                <th className={styles.tableHeadData}>Quantity</th>
+                <th className={styles.tableHeadData}>Total</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </TableContainer>
-      </div>
+            </thead>
 
-      <div
-        style={{
-          backgroundColor: "tomato",
-          width: "20%",
-          height: "200px",
-        }}
-      >
-        <h1>Cart Total</h1>
-
-        <div>
-          <p>Total: {cart.total}</p>
+            <tbody className={styles.tableBody}>
+              {cart.products.map((product) => (
+                <tr key={product.id} className={styles.tableBodyRow}>
+                  <td className={styles.tableBodyData}>
+                    <div>
+                      <Image
+                        src={product.productImg}
+                        alt="product img"
+                        width={50}
+                        height={50}
+                      />
+                    </div>
+                  </td>
+                  <td>{product.title}</td>
+                  <td>{product.price}</td>
+                  <td>
+                    <span>
+                      {product.extras.map((extra) => (
+                        <span key={extra.id}>{extra.text}</span>
+                      ))}
+                    </span>
+                  </td>
+                  <td>{product.quantity}</td>
+                  <td>{product.price * product.quantity}</td>
+                  <td>
+                    <button onClick={deletedProduct}>Delete Item</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
-        {open ? (
-          <div>
-            <button onClick={() => setCash(true)}>Cash Payment</button>
-            <PayPalScriptProvider
-              options={{
-                "client-id":
-                  "AehXLB7ZfcIRcIhvR76Fneiw1PYfYt27AdoFIxS1OdSll_xh_0JTlmsoJshoe-glOhsybUxtrjTQ-TDa",
-                components: "buttons",
-                currency: "USD",
-                "disable-funding": "credit,card",
-              }}
+        <div className={styles.checkoutCard}>
+          <h1>Cart Total</h1>
+
+          <p className={styles.checkoutTotal}>Total: ${cart.total}</p>
+
+          {open ? (
+            <div className={styles.paymentButtons}>
+              <button
+                onClick={() => setCash(true)}
+                className={styles.checkoutBtn}
+              >
+                Cash Payment
+              </button>
+              <PayPalScriptProvider
+                options={{
+                  "client-id":
+                    "AehXLB7ZfcIRcIhvR76Fneiw1PYfYt27AdoFIxS1OdSll_xh_0JTlmsoJshoe-glOhsybUxtrjTQ-TDa",
+                  components: "buttons",
+                  currency: "USD",
+                  "disable-funding": "credit,card",
+                }}
+              >
+                <ButtonWrapper currency={currency} showSpinner={false} />
+              </PayPalScriptProvider>
+              <Flutterwave />
+              <Paystack />
+              <button
+                onClick={() => setOpen(false)}
+                className={styles.checkoutBtn}
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+            // <ButtonSize text="Proceed to Checkout" />
+            <button
+              onClick={() => setOpen(!false)}
+              className={styles.checkoutBtn}
             >
-              <ButtonWrapper currency={currency} showSpinner={false} />
-            </PayPalScriptProvider>
-            <Flutterwave />
-            <Paystack />
-          </div>
-        ) : (
-          <button onClick={() => setOpen(!false)}>Proceed to Checkout</button>
-        )}
+              Proceed to Checkout
+            </button>
+          )}
+        </div>
       </div>
 
       {cash && (
@@ -205,32 +204,32 @@ const Cart = () => {
 
 export default Cart;
 
-const TableContainer = styled.table`
-  width: 100%;
-  margin: 1rem 3rem;
-  font-size: 0.9em;
-  min-width: 800px;
-  border-radius: 5px 5px 0 0;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+// const TableContainer = styled.table`
+//   width: 100%;
+//   margin: 1rem 3rem;
+//   font-size: 0.9em;
+//   min-width: 800px;
+//   border-radius: 5px 5px 0 0;
+//   overflow: hidden;
+//   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 
-  thead {
-    tr {
-      background-color: #000000;
-      color: #ffffff;
-      text-align: left;
-      font-weight: bold;
-    }
-  }
+//   thead {
+//     tr {
+//       background-color: #000000;
+//       color: #ffffff;
+//       text-align: left;
+//       font-weight: bold;
+//     }
+//   }
 
-  th,
-  td {
-    padding: 12px 15px;
-  }
+//   th,
+//   td {
+//     padding: 12px 15px;
+//   }
 
-  tbody {
-    tr {
-      border-bottom: 1px solid #dddddd;
-    }
-  }
-`;
+//   tbody {
+//     tr {
+//       border-bottom: 1px solid #dddddd;
+//     }
+//   }
+// `;

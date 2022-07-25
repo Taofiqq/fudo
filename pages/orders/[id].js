@@ -1,59 +1,61 @@
 import axios from "axios";
-import React from "react";
+import styles from "../../styles/Order.module.css";
+import { MdPayment } from "react-icons/md";
+import { GiCookingPot } from "react-icons/gi";
+import { TbBike } from "react-icons/tb";
+import { FiPackage } from "react-icons/fi";
 
 const Order = ({ data }) => {
   const status = 0;
 
   const statusClass = (index) => {
-    if (index < 1) return "done";
-    if (index === 1) return "inProgress";
-    if (index > 1) return "Undone";
+    if (index < 1) return styles.done;
+    if (index === 1) return styles.pending;
+    if (index > 1) return styles.undone;
   };
   console.log(data);
   return (
-    <div>
-      <h1>Orders here</h1>
+    <div className={styles.orderContainer}>
+      <h1>Here is the Details of your Order</h1>
 
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Customer</th>
-              <th>Address</th>
-              <th>Total</th>
-            </tr>
-          </thead>
+      <table className={styles.orderTable}>
+        <thead className={styles.tableHead}>
+          <tr className={styles.tableRow}>
+            <th className={styles.tableHeadData}>Order ID</th>
+            <th className={styles.tableHeadData}>Customer</th>
+            <th className={styles.tableHeadData}>Address</th>
+            <th className={styles.tableHeadData}>Total</th>
+          </tr>
+        </thead>
 
-          <tbody>
-            {/* {data.orders.map((order) => ( */}
-            <tr key={data.order.id}>
-              <td>{data.order.id}</td>
-              <td>{data.order.customer}</td>
-              <td>{data.order.address}</td>
-              <td>{data.order.total}</td>
-            </tr>
-            {/* ))} */}
-          </tbody>
-        </table>
+        <tbody className={styles.tableBody}>
+          {/* {data.orders.map((order) => ( */}
+          <tr key={data.order.id} className={styles.tableBodyRow}>
+            <td className={styles.tableData}>{data.order.id}</td>
+            <td className={styles.tableData}>{data.order.customer}</td>
+            <td className={styles.tableData}>{data.order.address}</td>
+            <td className={styles.tableData}>${data.order.total}</td>
+          </tr>
+          {/* ))} */}
+        </tbody>
+      </table>
 
-        <div
-          style={{
-            display: "flex",
-          }}
-        >
-          <div className={statusClass(0)}>
-            <span>Payment</span>
-          </div>
-          <div className={statusClass(1)}>
-            <span>Preparing</span>
-          </div>
-          <div className={statusClass(2)}>
-            <span>On the Way</span>
-          </div>
-          <div className={statusClass(3)}>
-            <span>Delivered</span>
-          </div>
+      <div className={styles.statusContainer}>
+        <div className={statusClass(0)}>
+          <span>Payment</span>
+          <MdPayment />
+        </div>
+        <div className={statusClass(1)}>
+          <span>Processing</span>
+          <GiCookingPot />
+        </div>
+        <div className={statusClass(2)}>
+          <span>On the Way</span>
+          <TbBike />
+        </div>
+        <div className={statusClass(3)}>
+          <span>Delivered</span>
+          <FiPackage />
         </div>
       </div>
     </div>
