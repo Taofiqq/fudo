@@ -17,7 +17,7 @@ const Footer = () => {
       <section className={styles.newsletter}>
         <div className={styles.footerLogo}>
           <Image src="/logo.png" width={25} height={25} alt="logo" />
-          <h1>Fudo</h1>
+          <h1 className={styles.footerText}>Fudo</h1>
         </div>
         <p>Stay up to Date with our delicious meals</p>
         <div className={styles.newsletterForm}>

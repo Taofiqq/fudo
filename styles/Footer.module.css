@@ -1,13 +1,8 @@
 .container {
   width: 100%;
-  /* background-color: red; */
+  /* background-color: #111111; */
   color: #d8d8d8;
-  height: 70vh;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
-  /* margin-top: 9rem; */
+  height: 55vh;
 }
 
 .footerContent {
@@ -17,6 +12,10 @@
   margin-top: 3rem;
 }
 
+.footerText {
+  margin-left: 1rem;
+}
+
 .copyright {
   text-align: center;
   margin-top: 4rem;
@@ -24,8 +23,7 @@
 
 .newsletter {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 .frameworks {
@@ -87,6 +85,12 @@
     align-items: center;
   }
 
+  .newsletter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .newsletterForm {
     display: flex;
     flex-direction: column;
@@ -101,6 +105,7 @@
 @media screen and (max-width: 370px) {
   .copyright {
     font-size: 0.6rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    padding-bottom: 0.5rem;
   }
 }

@@ -5,6 +5,7 @@ body {
   margin: 0;
   font-family: "Inter", sans-serif;
   background-color: #111111;
+  /* background-color: blue; */
   overflow-x: hidden;
 }
 
