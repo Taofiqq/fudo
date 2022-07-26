@@ -35,7 +35,9 @@ const Navbar = () => {
           <li className={styles.contentItem}>
             <Link href="/admin">Admin</Link>
           </li>
-          <li className={styles.contentItem}>Contact</li>
+          <li className={styles.contentItem}>
+            <Link href="/blog">Blog</Link>
+          </li>
         </ul>
 
         <Link href="/cart">
