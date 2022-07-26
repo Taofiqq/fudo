@@ -127,7 +127,7 @@ export const getServerSideProps = async (ctx) => {
   const url =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000/api"
-      : `${process.env.NEXT_PUBLIC_VERCEL_ENV}/api/products`;
+      : `${process.env.NEXT_PUBLIC_VERCEL_ENV}/api`;
 
   const { data: products } = await axios.get(`${url}/products`);
   const { data: orders } = await axios.get(`${url}/orders`);
