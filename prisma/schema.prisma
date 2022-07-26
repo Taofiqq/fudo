@@ -17,6 +17,7 @@ model Product {
   title           String     @db.VarChar(255)
   description     String     @db.VarChar(255)
   productImg      String     @db.VarChar(255)
+  category        String     @db.VarChar(255) 
   prices      Price[]
   extras Extra[]
   createdAt   DateTime @default(now())

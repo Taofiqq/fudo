@@ -203,33 +203,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-// const TableContainer = styled.table`
-//   width: 100%;
-//   margin: 1rem 3rem;
-//   font-size: 0.9em;
-//   min-width: 800px;
-//   border-radius: 5px 5px 0 0;
-//   overflow: hidden;
-//   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-
-//   thead {
-//     tr {
-//       background-color: #000000;
-//       color: #ffffff;
-//       text-align: left;
-//       font-weight: bold;
-//     }
-//   }
-
-//   th,
-//   td {
-//     padding: 12px 15px;
-//   }
-
-//   tbody {
-//     tr {
-//       border-bottom: 1px solid #dddddd;
-//     }
-//   }
-// `;

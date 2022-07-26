@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #d8d8d8;
+}
+
+.product {
+  margin-right: 5rem;
+  margin-bottom: 3rem;
+  /* border: 1px solid #d8d8d8; */
+  background-color: #343a40;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  background-color: #ff7396;
+  border: none;
+  outline: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  width: 15rem;
+  height: 2.5rem;
+}

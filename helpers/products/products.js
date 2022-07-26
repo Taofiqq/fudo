@@ -52,12 +52,13 @@ export const getProductById = async (req, res) => {
 // endpoint to create new product
 export const createProducts = async (req, res) => {
   try {
-    const { title, description, productImg } = req.body;
+    const { title, description, productImg, category } = req.body;
     const createdProduct = await prisma.product.create({
       data: {
         title,
         description,
         productImg,
+        category,
       },
     });
 
