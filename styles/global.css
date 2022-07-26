@@ -5,17 +5,18 @@ body {
   margin: 0;
   font-family: "Inter", sans-serif;
   background-color: #111111;
+  overflow-x: hidden;
 }
 
 a {
   color: inherit;
   text-decoration: none;
 }
-ul {
+ul,
+li {
   list-style: none;
 }
 
 * {
   box-sizing: border-box;
-  overflow-x: hidden;
 }

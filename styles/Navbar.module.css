@@ -9,7 +9,7 @@
   margin: 0;
   background-color: transparent;
   padding: 0.5rem 2rem;
-  position: fixed;
+  /* position: fixed; */
 }
 
 .logoContainer {

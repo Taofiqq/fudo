@@ -8,22 +8,32 @@ import {
   BsYoutube,
 } from "react-icons/bs";
 import Image from "next/image";
+import styles from "../../styles/Footer.module.css";
+import Link from "next/link";
 
 const Footer = () => {
   return (
-    <FooterContainer>
-      <Newsletter>
-        <Image src="/logo.png" width={50} height={50} alt="logo" />
-        <h1>Fudo</h1>
+    <footer className={styles.container}>
+      <section className={styles.newsletter}>
+        <div className={styles.footerLogo}>
+          <Image src="/logo.png" width={25} height={25} alt="logo" />
+          <h1>Fudo</h1>
+        </div>
         <p>Stay up to Date with our delicious meals</p>
-        <form action="">
-          <input type="email" placeholder="Enter your email" />
-          <button type="submit">Subscribe</button>
-        </form>
-      </Newsletter>
-      <hr />
+        <div className={styles.newsletterForm}>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className={styles.newsletterInput}
+          />
+          <button type="submit" className={styles.newsletterButton}>
+            Subscribe
+          </button>
+        </div>
+      </section>
+      <hr className={styles.line} />
 
-      <FooterNav>
+      <section className={styles.footerContent}>
         <div>
           <h2>Fudo Foods</h2>
           <p>Copyright &copy; 2022</p>
@@ -32,70 +42,80 @@ const Footer = () => {
 
         <div>
           <h2>Products</h2>
-          <ul>
-            <li>Zinger Burger</li>
-            <li>Zinger Burger</li>
-            <li>Zinger Burger</li>
-            <li>Zinger Burger</li>
-          </ul>
+          {/* <ul> */}
+          <li>Zinger Burger</li>
+          <li>Zinger Burger</li>
+          <li>Zinger Burger</li>
+          <li>Zinger Burger</li>
+          {/* </ul> */}
         </div>
         <div>
           <h2>Company</h2>
-          <ul>
-            <li>Zinger Burger</li>
-            <li>Zinger Burger</li>
-            <li>Zinger Burger</li>
-            <li>Zinger Burger</li>
-          </ul>
+          {/* <ul> */}
+          <li>Zinger Burger</li>
+          <li>Zinger Burger</li>
+          <li>Zinger Burger</li>
+          <li>Zinger Burger</li>
+          {/* </ul> */}
         </div>
         <div>
           <h2>Support</h2>
-          <ul>
-            <li>Zinger Burger</li>
-            <li>Zinger Burger</li>
-            <li>Zinger Burger</li>
-            <li>Zinger Burger</li>
-          </ul>
+          {/* <ul> */}
+          <li>Zinger Burger</li>
+          <li>Zinger Burger</li>
+          <li>Zinger Burger</li>
+          <li>Zinger Burger</li>
+          {/* </ul> */}
         </div>
-        <SocialsContainer>
-          <h2>Socials</h2>
-          <Socials>
-            <li>
+        <div>
+          <h2
+            style={{
+              textAlign: "center",
+            }}
+          >
+            Socials
+          </h2>
+          <div className={styles.socialIcons}>
+            <li className={styles.icons}>
               <BsLinkedin />
             </li>
-            <li>
+            <li className={styles.icons}>
               <BsTwitter />
             </li>
-            <li>
+            <li className={styles.icons}>
               <BsFacebook />
             </li>
-            <li>
+            <li className={styles.icons}>
               <BsInstagram />
             </li>
-            <li>
+            <li className={styles.icons}>
               <BsYoutube />
             </li>
-          </Socials>
-        </SocialsContainer>
-      </FooterNav>
-    </FooterContainer>
+          </div>
+        </div>
+      </section>
+
+      <p className={styles.copyright}>
+        Built with{" "}
+        <Link href="https://nextjs.org/">
+          <a className={styles.frameworks}>NextJS</a>
+        </Link>
+        ,{" "}
+        <Link href="https://planetscale.com/ ">
+          <a className={styles.frameworks}>PlanetScale DB</a>
+        </Link>{" "}
+        and{" "}
+        <Link href="https://www.prisma.io/">
+          <a className={styles.frameworks}>Prisma</a>
+        </Link>
+      </p>
+    </footer>
   );
 };
 
 export default Footer;
 
-const FooterContainer = styled.footer`
-  background: #111111;
-  width: 100%;
-  height: 19rem;
-  color: #383838;
-
-  hr {
-    margin-top: 0.5rem;
-  }
-`;
-
-const Newsletter = styled.div`
+const section = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,16 +145,6 @@ const Newsletter = styled.div`
     border-radius: 0.3rem;
     background: #000000;
     color: #ffffff;
-  }
-`;
-const FooterNav = styled.nav`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  padding: 0 4rem;
-  margin-top: 3rem;
-
-  li {
-    list-style: none;
   }
 `;
 
