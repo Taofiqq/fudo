@@ -124,10 +124,14 @@ const Admin = ({ products, orders }) => {
 export default Admin;
 
 export const getServerSideProps = async (ctx) => {
-  const { data: products } = await axios.get(
-    "http://localhost:3000/api/products"
-  );
-  const { data: orders } = await axios.get("http://localhost:3000/api/orders");
+  const url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/api"
+      : `${process.env.NEXT_PUBLIC_VERCEL_ENV}/api/products`;
+
+  const { data: products } = await axios.get(`${url}/products`);
+  const { data: orders } = await axios.get(`${url}/orders`);
+
   return {
     props: {
       products: products.products,

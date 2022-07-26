@@ -66,7 +66,10 @@ export default Order;
 
 export const getServerSideProps = async ({ params }) => {
   const { id } = params;
-  const res = await axios.get(`http://localhost:3000/api/orders/${id}`);
-  const data = res.data;
+  const url =
+    process.env.NODE_ENV === "development"
+      ? `http://localhost:3000/api/orders/${params.id}`
+      : `${process.env.NEXT_PUBLIC_VERCEL_ENV}/api/orders/${id}`;
+  const { data } = await axios.get(url);
   return { props: { data } };
 };
