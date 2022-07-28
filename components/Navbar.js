@@ -5,6 +5,7 @@ import styles from "../styles/Navbar.module.css";
 import Image from "next/image";
 import { FaHamburger } from "react-icons/fa";
 import { useState } from "react";
+import { CgClose } from "react-icons/cg";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const quantity = useSelector((state) => state.cart.quantity);
@@ -74,6 +75,10 @@ const Navbar = () => {
             <AiOutlineShoppingCart className={styles.cartIcon} />
           </div>
         </Link>
+
+        <button className={styles.closeButton} onClick={() => setIsOpen(false)}>
+          <CgClose />
+        </button>
       </ul>
     </nav>
   );

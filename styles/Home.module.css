@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 100vh;
+  /* width: 100%;
+  height: 100vh; */
 }
 
 .heroContainer {
@@ -13,7 +13,6 @@
   justify-content: center;
   align-items: center;
   margin-top: 10rem;
-  /* margin: auto; */
 }
 
 .heroTitle {
@@ -90,34 +89,30 @@
   border: none;
   color: #d8d8d8;
   width: 12rem;
-  height: 2rem;
+  height: 3rem;
   cursor: pointer;
-  border-radius: 0.3rem;
+  border-radius: 1rem;
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  width: 100%;
-  height: 100vh;
   margin-top: 15rem;
 }
 
 .mainHeader {
   color: #d8d8d8;
+  text-align: center;
 }
 
 .tabsContainer {
   background-color: #212529;
-  width: 50%;
-  padding: 1rem 0;
+  width: 100%;
+  padding: 1rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 112rem;
-  position: relative;
 }
 
 .productsContainer {
@@ -125,8 +120,29 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 200vh;
-  /* background-color: white; */
   margin-top: 15rem;
+}
+
+@media screen and (max-width: 650px) {
+  .tabsContainer {
+    width: 70%;
+    padding: 1rem 1rem;
+  }
+}
+@media screen and (max-width: 440px) {
+  .tabsContainer {
+    width: 55%;
+    padding: 0.8em 0.4rem;
+  }
+
+  .activeTab {
+    background-color: #343a40;
+    outline: none;
+    border: none;
+    color: #d8d8d8;
+    width: 10rem;
+    height: 2rem;
+    cursor: pointer;
+    border-radius: 1rem;
+  }
 }

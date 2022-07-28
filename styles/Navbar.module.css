@@ -7,9 +7,9 @@
   height: 4rem;
   padding: 0;
   margin: 0;
-  background-color: transparent;
-  padding: 3rem 2rem;
-  /* position: fixed; */
+  background-color: #343a40;
+  padding: 2rem 2rem;
+  position: fixed;
 }
 
 .logoContainer {
@@ -102,8 +102,8 @@
   }
   .mobileMenu {
     position: fixed;
-    height: 80vh;
-    width: 50vw;
+    height: 100%;
+    width: 100%;
     background-color: #000000;
     top: 4rem;
     margin: 0;
@@ -151,5 +151,15 @@
     right: -0.1rem;
     font-size: 0.8rem;
     padding: 0.1rem 0.3rem;
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+    border: none;
+    background: transparent;
+    color: #d8d8d8;
+    font-size: 2rem;
   }
 }

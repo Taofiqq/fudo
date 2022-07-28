@@ -70,7 +70,7 @@ export default function Home({ data }) {
         </Link>
       </header>
 
-      <main className={styles.main} id="products">
+      <section className={styles.main} id="products">
         <h1 className={styles.mainHeader}>Order the food you love</h1>
 
         <div className={styles.tabsContainer}>
@@ -85,16 +85,12 @@ export default function Home({ data }) {
             </button>
           ))}
         </div>
-      </main>
+      </section>
 
       <section className={styles.productsContainer}>
         {currentTab === 1 && <Sharwarma products={products} />}
         {currentTab === 2 && <Burger products={products} />}
         {currentTab === 3 && <Pizza products={products} />}
-      </section>
-
-      <section>
-        <h1>COntact fudoo</h1>
       </section>
     </div>
   );
