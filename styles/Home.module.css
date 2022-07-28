@@ -79,7 +79,7 @@
   border: none;
   color: #d8d8d8;
   width: 12rem;
-  height: 2rem;
+  height: 3rem;
   cursor: pointer;
   transition: all 0.25s ease-out;
 }
@@ -135,14 +135,12 @@
     padding: 0.8em 0.4rem;
   }
 
-  .activeTab {
-    background-color: #343a40;
-    outline: none;
-    border: none;
-    color: #d8d8d8;
-    width: 10rem;
+  .tab {
+    width: 11rem;
     height: 2rem;
-    cursor: pointer;
-    border-radius: 1rem;
+  }
+  .activeTab {
+    width: 11rem;
+    height: 2rem;
   }
 }
