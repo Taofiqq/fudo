@@ -4,7 +4,6 @@ import styles from "../styles/Sharwarma.module.css";
 import Link from "next/link";
 
 const Sharwarma = ({ products }) => {
-  console.log(products);
   return (
     <div className={styles.container}>
       {products
@@ -13,8 +12,8 @@ const Sharwarma = ({ products }) => {
           <div key={product.id} className={styles.product}>
             <Image
               src={product.productImg}
-              width={300}
-              height={300}
+              width={100}
+              height={100}
               alt="product"
             />
             <h1>{product.title}</h1>

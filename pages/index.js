@@ -12,7 +12,6 @@ import axios from "axios";
 
 export default function Home({ data }) {
   const { products } = data;
-  console.log(products);
   // const { data, error } = useFetchAllProducts();
 
   const [currentTab, setCurrentTab] = useState(1);
@@ -30,22 +29,7 @@ export default function Home({ data }) {
       id: 3,
       name: "Pizza",
     },
-    // {
-    //   id: 4,
-    //   name: "Sushi",
-    // },
-    // {
-    //   id: 5,
-    //   name: "Drinks",
-    // },
   ];
-
-  // if (error)
-  //   return (
-  //     <div>Ooops, Failed to fetch Resource. Dont worry we will be back</div>
-  //   );
-  // if (!data) return <LoaderSpinner />;
-  // const { products } = data;
 
   const handleClick = (id) => {
     setCurrentTab(id);
@@ -86,7 +70,6 @@ export default function Home({ data }) {
           ))}
         </div>
       </section>
-
       <section className={styles.productsContainer}>
         {currentTab === 1 && <Sharwarma products={products} />}
         {currentTab === 2 && <Burger products={products} />}

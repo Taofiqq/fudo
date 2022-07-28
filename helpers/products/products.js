@@ -72,6 +72,20 @@ export const createProducts = async (req, res) => {
   }
 };
 
+// delete all produts
+
+export const deleteAllProducts = async (req, res) => {
+  try {
+    await prisma.product.deleteMany();
+    res.status(200).json({
+      status: "success",
+      message: "All products deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 //  endpoint to delete product by id
 
 export const deleteProductById = async (req, res) => {

@@ -126,17 +126,17 @@ const Product = ({ data }) => {
 
         <span className={styles.productPrice}>${price}</span>
 
-        <div>
+        <div className={styles.button}>
           <input
             type="number"
             onChange={(e) => setQuantity(e.target.value)}
             defaultValue={1}
             className={styles.quantity}
           />
+          <button onClick={handleAddToCart} className={styles.buttonCart}>
+            Add to Cart
+          </button>
         </div>
-        <button onClick={handleAddToCart} className={styles.buttonCart}>
-          Add to Cart
-        </button>
         <Toaster />
       </div>
     </main>
@@ -152,9 +152,7 @@ export const getServerSideProps = async ({ params }) => {
       : `${process.env.NEXT_PUBLIC_VERCEL_ENV}/api/products/${params.id}`;
 
   const { data } = await axios.get(url);
-  // const { data } = await axios.get(
-  //   `http://localhost:3000/api/products/${params.id}`
-  // );
+
   return {
     props: {
       data: data,
