@@ -49,10 +49,6 @@
   padding: 1rem;
 }
 
-.tableBodyRow {
-  /* border-bottom: 1px solid #dddddd; */
-}
-
 .tableBodyRow:nth-of-type(even) {
   background-color: #000000;
   color: #d8d8d8;
