@@ -3,16 +3,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* width: 100%;
-  height: 100%;
-  padding: 20px; */
   color: #d8d8d8;
 }
 
+.title {
+  margin-top: 8rem;
+}
 .cartWrapper {
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .cartTableContainer {
@@ -23,14 +25,12 @@
 .table {
   border-collapse: collapse;
   width: 100%;
-  /* margin: 1rem 2rem; */
   border-radius: 5px 5px 0 0;
-  border: 1px solid #d8d8d8;
+  border: 1px solid #f35815;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .tableHead {
-  /* background-color: #009879; */
   text-align: left;
   font-weight: bold;
 }
@@ -45,8 +45,12 @@
   padding: 12px 15px;
 }
 
+.tableBodyData {
+  padding: 1rem;
+}
+
 .tableBodyRow {
-  border-bottom: 1px solid #dddddd;
+  /* border-bottom: 1px solid #dddddd; */
 }
 
 .tableBodyRow:nth-of-type(even) {
@@ -59,21 +63,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   /* justify-content: center; */
 }
 
 .checkoutBtn {
-  width: 50%;
-  height: 50px;
-  background-color: #009879;
-  border-radius: 5px;
-  border: none;
+  border: 1px solid #f35815;
+  background-color: transparent;
   color: #d8d8d8;
-  font-weight: bold;
-  font-size: 1.2rem;
+  padding: 12px 20px;
+  border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   margin-bottom: 1.5rem;
+}
+
+.checkoutBtn:hover {
+  transform: scale(1.05);
 }
 
 .paymentButtons {
@@ -81,10 +87,41 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
-  /* margin-bottom: 10rem; */
 }
 
 .checkoutTotal {
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+.extracont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 850px) {
+  .cartWrapper {
+    flex-direction: column;
+  }
+
+  .cartTableContainer {
+    width: 80%;
+    padding-left: 0;
+  }
+  .checkoutCard {
+    border: 1px solid #f35815;
+    margin-top: 2rem;
+    width: 70%;
+    height: 30rem;
+  }
+  .tableHeadData {
+    font-size: 0.4rem;
+  }
+
+  .tableBodyData {
+    font-size: 0.4rem;
+    padding: 0.7rem;
+  }
 }

@@ -38,8 +38,6 @@ const Cart = () => {
     }
   };
 
-  const deletedProduct = () => {};
-
   const ButtonWrapper = ({ currency, showSpinner }) => {
     // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
     // This is the main reason to wrap the PayPalButtons in a new component
@@ -100,8 +98,7 @@ const Cart = () => {
   };
   return (
     <div className={styles.cartContainer}>
-      <h1 className={cart.title}>Cart Orders</h1>
-
+      <h1 className={styles.title}>Cart Orders</h1>
       <div className={styles.cartWrapper}>
         <div className={styles.cartTableContainer}>
           <table className={styles.table}>
@@ -113,7 +110,6 @@ const Cart = () => {
                 <th className={styles.tableHeadData}>Extras</th>
                 <th className={styles.tableHeadData}>Quantity</th>
                 <th className={styles.tableHeadData}>Total</th>
-                <th>Actions</th>
               </tr>
             </thead>
 
@@ -130,19 +126,18 @@ const Cart = () => {
                       />
                     </div>
                   </td>
-                  <td>{product.title}</td>
-                  <td>{product.price}</td>
-                  <td>
-                    <span>
+                  <td className={styles.tableBodyData}>{product.title}</td>
+                  <td className={styles.tableBodyData}>{product.price}</td>
+                  <td className={styles.tableBodyData}>
+                    <span className={styles.extracont}>
                       {product.extras.map((extra) => (
                         <span key={extra.id}>{extra.text}</span>
                       ))}
                     </span>
                   </td>
-                  <td>{product.quantity}</td>
-                  <td>{product.price * product.quantity}</td>
-                  <td>
-                    <button onClick={deletedProduct}>Delete Item</button>
+                  <td className={styles.tableBodyData}>{product.quantity}</td>
+                  <td className={styles.tableBodyData}>
+                    {product.price * product.quantity}
                   </td>
                 </tr>
               ))}
@@ -172,7 +167,11 @@ const Cart = () => {
                   "disable-funding": "credit,card",
                 }}
               >
-                <ButtonWrapper currency={currency} showSpinner={false} />
+                <ButtonWrapper
+                  currency={currency}
+                  showSpinner={false}
+                  className={styles.paypal}
+                />
               </PayPalScriptProvider>
               <Flutterwave />
               <Paystack />
