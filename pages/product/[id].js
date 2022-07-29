@@ -1,11 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import axios from "axios";
-import useSWR from "swr";
-import { useFetchProductById, useProductId } from "../../utils/fetcher";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import LoaderSpinner from "../../components/LoaderSpinner";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct, reset } from "../../redux/cartSlice";
 import styles from "../../styles/Product.module.css";
@@ -14,27 +10,16 @@ import toast, { Toaster } from "react-hot-toast";
 
 const Product = ({ data }) => {
   const { product } = data;
-  console.log(product);
+
   const router = useRouter();
 
   const { id } = router.query;
-
-  // const { data, error } = useFetchProductById(id);
-
-  // let productPrice = [];
-
-  // data?.product.prices.forEach((price) => {
-  //   productPrice.push(price.price);
-  // });
 
   let newProductPrice = [];
 
   product?.prices.map((price) => {
     newProductPrice.push(price.price);
   });
-
-  console.log(newProductPrice);
-
   const [price, setPrice] = useState(newProductPrice[0]);
   const [size, setSize] = useState(0);
   const [extras, setExtras] = useState([]);
@@ -71,41 +56,38 @@ const Product = ({ data }) => {
     reset();
   };
 
-  // if (error) return <div>failed to load</div>;
-  // if (!data) return <LoaderSpinner />;
-
   return (
     <main className={styles.productContainer}>
       <div className={styles.left}>
         <Image
           src={data.product.productImg}
-          width={600}
-          height={400}
           alt="product"
-          objectFit="contain"
-          priority
+          width={400}
+          height={400}
+          quality={100}
+          objectFit="cover"
         />
       </div>
       <div className={styles.right}>
-        <h1>{data.product.title}</h1>
-        <p>{data.product.description}</p>
-        <p>Choose your preferred size</p>
+        <h1 className={styles.title}>{data.product.title}</h1>
+        <p className={styles.description}>{data.product.description}</p>
+        <p className={styles.productSize}>Choose your preferred size</p>
         <div className={styles.size}>
-          <div onClick={() => handleSize(0)}>
+          <div onClick={() => handleSize(0)} className={styles.sizeButton}>
             <ButtonSize text={"Small size"} />
           </div>
-          <div onClick={() => handleSize(1)}>
+          <div onClick={() => handleSize(1)} className={styles.sizeButton}>
             <ButtonSize text={"Medium size"} />
           </div>
-          <div onClick={() => handleSize(2)}>
+          <div onClick={() => handleSize(2)} className={styles.sizeButton}>
             <ButtonSize text={"Large size"} />
           </div>
-          <div onClick={() => handleSize(3)}>
+          <div onClick={() => handleSize(3)} className={styles.sizeButton}>
             <ButtonSize text={" Extra Large size"} />
           </div>
         </div>
         <div className={styles.extraContainer}>
-          <p>Chooose additional Ingridients</p>
+          <p className={styles.ingridients}>Chooose additional Ingridients</p>
           <div className={styles.extras}>
             {data.product.extras.map((extra) => (
               <div key={extra.id} className={styles.extra}>

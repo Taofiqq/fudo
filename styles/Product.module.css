@@ -12,6 +12,7 @@
   align-items: center;
   padding-left: 2rem;
 }
+
 .right {
   width: 50%;
   display: flex;
@@ -20,7 +21,7 @@
   align-items: center;
 }
 .buttonCart {
-  width: 10rem;
+  width: 13rem;
   height: 2.5rem;
   background-color: #fff;
   color: #000000;
@@ -116,27 +117,61 @@
   margin-top: 1.5rem;
 }
 
-@media screen and (max-width: 960px) {
+.title {
+  text-align: center;
+}
+.description {
+  text-align: center;
+}
+.productSize {
+  text-align: center;
+}
+
+.ingridients {
+  text-align: center;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 955px) {
   .productContainer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 20rem;
   }
-
-  .left {
-    margin-top: 20rem;
-  }
-
-  .button {
-    /* display: flex; */
+  .right {
+    margin-top: 2rem;
   }
 }
-@media screen and (max-width: 500px) {
-  .size {
-    flex-direction: column;
+@media screen and (max-width: 455px) {
+  .title {
+    font-size: 1rem;
+  }
+  .description {
+    font-size: 0.7rem;
+  }
+  .productSize {
+    font-size: 0.65rem;
   }
 
-  .buttonSizes {
-    margin-bottom: 1rem;
+  .extras {
+    flex-direction: column;
+  }
+  .extra {
+    margin-bottom: 0.5rem;
+  }
+  .ingridients {
+    font-size: 0.8rem;
+  }
+  .size {
+    flex-wrap: wrap;
+  }
+  .sizeButton {
+    margin-bottom: 0.5rem;
   }
 }
