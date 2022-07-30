@@ -31,10 +31,10 @@ const Navbar = () => {
             <Link href="/">Home</Link>
           </li>
           <li className={styles.contentItem}>
-            <Link href="/orders">Orders</Link>
+            <Link href="/admin">Admin</Link>
           </li>
           <li className={styles.contentItem}>
-            <Link href="/admin">Admin</Link>
+            <Link href="/about">About</Link>
           </li>
           <li className={styles.contentItem}>
             <Link href="/blog">Blog</Link>
@@ -63,12 +63,12 @@ const Navbar = () => {
           <Link href="/">Home</Link>
         </li>
         <li className={styles.menuItem}>
-          <Link href="/orders">Orders</Link>
-        </li>
-        <li className={styles.menuItem}>
           <Link href="/admin">Admin</Link>
         </li>
-        <li className={styles.menuItem}>Contact</li>
+        <li className={styles.menuItem}>
+          <Link href="/about">About</Link>
+        </li>
+        <li className={styles.menuItem}>Blog</li>
         <Link href="/cart">
           <div className={styles.cartMobile}>
             <span className={styles.cartQuantityMobile}>{quantity}</span>

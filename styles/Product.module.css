@@ -21,18 +21,20 @@
   align-items: center;
 }
 .buttonCart {
-  width: 13rem;
-  height: 2.5rem;
-  background-color: #fff;
-  color: #000000;
-  border-radius: 0.25rem;
-  font-size: 1.2rem;
-  font-weight: normal;
-  border: none;
+  border: 1px solid #f35815;
+  background-color: transparent;
+  color: #d8d8d8;
+  padding: 12px 20px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 1.5rem;
   margin-top: 1rem;
 }
 
+.buttonCart:hover {
+  transform: scale(1.05);
+}
 .size {
   display: flex;
   justify-content: center;
@@ -40,15 +42,13 @@
 }
 
 .buttonSizes {
-  width: 7rem;
-  height: 2.5rem;
-  background-color: #fff;
-  color: #000000;
-  border-radius: 0.25rem;
-  font-size: 0.8rem;
-  font-weight: normal;
-  border: none;
+  border: 1px solid #f35815;
+  background-color: transparent;
+  color: #d8d8d8;
+  padding: 12px 20px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
   margin-right: 0.5rem;
 }
 .productPrice {

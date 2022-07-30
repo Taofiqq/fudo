@@ -49,6 +49,7 @@ const Product = ({ data }) => {
 
   const handleAddToCart = () => {
     dispatch(addProduct({ ...data.product, quantity, price, extras }));
+    console.log(data.product, quantity, price, extras);
     toast.success("Item Added to cart", {
       position: "top-center",
       duration: 3000,

@@ -1,9 +1,13 @@
 import axios from "axios";
 import Image from "next/image";
-import React from "react";
+import styles from "../../styles/Admin.module.css";
 import { useFetchAllProducts, useFetchAllOrders } from "../../utils/fetcher";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Admin = ({ products, orders }) => {
+  const cart = useSelector((state) => state.cart);
+  console.log(cart.products);
   const [productsCount, setProductsCount] = React.useState(products);
   const [ordersCount, setOrdersCount] = React.useState(orders);
   const status = ["Pending", "Processing", "Delivered", "Cancelled"];
@@ -20,7 +24,6 @@ const Admin = ({ products, orders }) => {
     const item = ordersCount.filter((order) => order.id === id)[0];
     const currentStatus = item.status;
 
-    console.log(currentStatus);
     try {
       const res = await axios.put(`/api/orders/${id}`, {
         status: currentStatus + 1,
@@ -33,45 +36,46 @@ const Admin = ({ products, orders }) => {
       throw error;
     }
   };
-  console.log(products, orders);
-  return (
-    <div>
-      {/* left */}
-      <div>
-        <h1>Produts</h1>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Id</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Action</th>
+  return (
+    <div className={styles.container}>
+      {/* <h1>Manage Customer Orders</h1> */}
+      {/* left */}
+      <div className={styles.left}>
+        <table className={styles.table}>
+          <caption className={styles.caption}>Produts</caption>
+          <thead className={styles.tableHead}>
+            <tr className={styles.tableRow}>
+              <th className={styles.tableHeadRow}>Image</th>
+              <th className={styles.tableHeadRow}>Product Id</th>
+              <th className={styles.tableHeadRow}>Title</th>
+              <th className={styles.tableHeadRow}>Prices</th>
+              <th className={styles.tableHeadRow}>Action</th>
             </tr>
           </thead>
-          {productsCount.map((product) => (
+          {cart.products.map((product) => (
             <tbody key={product.id}>
-              <tr>
-                <td>
+              <tr className={styles.tableBodyRow}>
+                <td className={styles.tableBodyData}>
                   <Image
                     src={product.productImg}
                     alt={product.title}
-                    width={100}
-                    height={100}
+                    width={50}
+                    height={50}
                   />
                 </td>
-                <td>{product.id.slice(0, 6)}</td>
-                <td>{product.title}</td>
-                <td>
-                  {product.prices.map((price) => (
-                    <span key={price.id}>{price.price}</span>
-                  ))}
+                <td className={styles.tableBodyData}>
+                  {product.id.slice(0, 10)}...
                 </td>
+                <td className={styles.tableBodyData}>{product.title}</td>
+                <td className={styles.tableBodyData}>{product.price}</td>
 
-                <td>
-                  <button>Edit</button>
-                  <button onClick={() => handleDelete(product.id)}>
+                <td className={styles.tableBodyData}>
+                  <button className={styles.btn}>Edit</button>
+                  <button
+                    className={styles.btn}
+                    onClick={() => handleDelete(product.id)}
+                  >
                     Delete
                   </button>
                 </td>
@@ -83,34 +87,44 @@ const Admin = ({ products, orders }) => {
 
       {/* right */}
 
-      <div>
-        <h1>orders</h1>
+      <div className={styles.right}>
+        <table className={styles.table}>
+          <caption className={styles.caption}>Orders</caption>
+          <thead className={styles.tableHead}>
+            <tr className={styles.tableRow}>
+              <th className={styles.tableHeadRow}>Order Id</th>
+              <th className={styles.tableHeadRow}>Customer</th>
+              <th className={styles.tableHeadRow}>Total</th>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Customer</th>
-              <th>Total</th>
-              <th>Payment</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th className={styles.tableHeadRow}>Payment</th>
+              <th className={styles.tableHeadRow}>Status</th>
+              {/* <th>Action</th> */}
             </tr>
           </thead>
           {ordersCount.map((order) => (
-            <tbody key={order.id}>
-              <tr>
-                <td>{order.id}</td>
-                <td>{order.customer}</td>
-                <td>${order.total}</td>
-                <td>
-                  {order.method === 0 ? <span>Cash</span> : <span>Paid</span>}
+            <tbody key={order.id} className={styles.tableBody}>
+              <tr className={styles.tableBodyRow}>
+                <td className={styles.tableBodyData}>
+                  {order.id.slice(0, 10)}...
                 </td>
-                <td>
-                  <button>{status[order.status]}</button>
+                <td className={styles.tableBodyData}>{order.customer}</td>
+                <td className={styles.tableBodyData}>${order.total}</td>
+
+                <td className={styles.tableBodyData}>
+                  {order.method === 0 ? (
+                    <span>Cash</span>
+                  ) : (
+                    <span className={styles.payment}>Card Payment</span>
+                  )}
                 </td>
-                <td>
-                  <button onClick={() => handleStatus(order.id)}>Next</button>
+                <td className={styles.tableBodyData}>
+                  <button className={styles.btn}>{status[order.status]}</button>
+                  <button
+                    className={styles.btn}
+                    onClick={() => handleStatus(order.id)}
+                  >
+                    Next
+                  </button>
                 </td>
               </tr>
             </tbody>

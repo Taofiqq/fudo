@@ -1,12 +1,12 @@
-import React from "react";
 import { useFetchAllOrders } from "../../utils/fetcher";
+import styles from "../../styles/Orders.module.css";
 
 const Orders = () => {
   const { data, error } = useFetchAllOrders();
 
   return (
-    <div>
-      <h1>Here is the whole orders</h1>
+    <div className={styles.container}>
+      <h1>Here is the whole customers orders</h1>
 
       {data?.orders.map((order) => (
         <div key={order.id}>

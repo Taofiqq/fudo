@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import styles from "../../styles/Flutterwave.module.css";
 
-const Flutterwave = () => {
+const Flutterwave = ({ createOrder }) => {
   const amount = useSelector((state) => state.cart.total);
   console.log(amount, "flutter");
   const config = {
@@ -29,13 +29,20 @@ const Flutterwave = () => {
     // <div>
     <button
       onClick={() => {
-        handleFlutterPayment({
-          callback: (response) => {
-            console.log(response);
-            closePaymentModal(); // this will close the modal programmatically
-          },
-          onClose: () => {},
-        });
+        createOrder({
+          customer: "Taofiq Aiyelabegan",
+          address: "LakeVille NY",
+          total: amount,
+          status: 1,
+          method: 1,
+        }),
+          handleFlutterPayment({
+            callback: (response) => {
+              console.log(response);
+              closePaymentModal(); // this will close the modal programmatically
+            },
+            onClose: () => {},
+          });
       }}
       className={styles.btn}
     >

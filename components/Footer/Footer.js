@@ -19,7 +19,7 @@ const Footer = () => {
           <Image src="/logo.png" width={25} height={25} alt="logo" />
           <h1 className={styles.footerText}>Fudo</h1>
         </div>
-        <p>Stay up to Date with our delicious meals</p>
+        {/* <p>Stay up to Date with our delicious meals</p> */}
         <div className={styles.newsletterForm}>
           <input
             type="email"
@@ -37,34 +37,39 @@ const Footer = () => {
         <div>
           <h2>Fudo Foods</h2>
           <p>Copyright &copy; 2022</p>
-          <p>Created By Taofiq</p>
+          <p
+            style={{
+              color: "#f35825",
+            }}
+          >
+            Created By Taofiq
+          </p>
         </div>
 
         <div>
           <h2>Products</h2>
           {/* <ul> */}
-          <li>Zinger Burger</li>
-          <li>Zinger Burger</li>
-          <li>Zinger Burger</li>
-          <li>Zinger Burger</li>
+          <li>Shawarma</li>
+          <li>Burgers</li>
+          <li>Pizza</li>
           {/* </ul> */}
         </div>
         <div>
           <h2>Company</h2>
           {/* <ul> */}
-          <li>Zinger Burger</li>
-          <li>Zinger Burger</li>
-          <li>Zinger Burger</li>
-          <li>Zinger Burger</li>
+          <li>About Us</li>
+          <li>Blog</li>
+          <li>Testimonials</li>
+          <li>Pricing</li>
           {/* </ul> */}
         </div>
         <div>
           <h2>Support</h2>
           {/* <ul> */}
-          <li>Zinger Burger</li>
-          <li>Zinger Burger</li>
-          <li>Zinger Burger</li>
-          <li>Zinger Burger</li>
+          <li>Help Center</li>
+          <li>Terms of Service</li>
+          <li>Legaal</li>
+          <li>Privacy Policy</li>
           {/* </ul> */}
         </div>
         <div>

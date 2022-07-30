@@ -61,22 +61,18 @@ const Cart = () => {
           disabled={false}
           forceReRender={[amount, currency, style]}
           fundingSource={undefined}
-          createOrder={(data, actions) => {
-            return actions.order
-              .create({
-                purchase_units: [
-                  {
-                    amount: {
-                      currency_code: currency,
-                      value: amount,
-                    },
+          createOrder={async (data, actions) => {
+            const orderId = await actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    currency_code: currency,
+                    value: amount,
                   },
-                ],
-              })
-              .then((orderId) => {
-                // Your code here after create the order
-                return orderId;
-              });
+                },
+              ],
+            });
+            return orderId;
           }}
           onApprove={function (data, actions) {
             return actions.order.capture().then(function (details) {
@@ -167,13 +163,9 @@ const Cart = () => {
                   "disable-funding": "credit,card",
                 }}
               >
-                <ButtonWrapper
-                  currency={currency}
-                  showSpinner={false}
-                  className={styles.paypal}
-                />
+                <ButtonWrapper currency={currency} showSpinner={false} />
               </PayPalScriptProvider>
-              <Flutterwave />
+              <Flutterwave createOrder={createOrder} />
               <Paystack />
               <button
                 onClick={() => setOpen(false)}
@@ -195,7 +187,11 @@ const Cart = () => {
       </div>
 
       {cash && (
-        <CashPaymentModal total={cart.total} createOrder={createOrder} />
+        <CashPaymentModal
+          total={cart.total}
+          createOrder={createOrder}
+          setCash={setCash}
+        />
       )}
     </div>
   );

@@ -19,15 +19,19 @@
 }
 
 .button {
-  background-color: #ff7396;
-  border: none;
-  outline: none;
-  border-radius: 0.3rem;
+  border: 1px solid #f35815;
+  background-color: transparent;
+  color: #d8d8d8;
+  padding: 12px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  width: 15rem;
-  height: 2.5rem;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 1.5rem;
 }
 
+.button:hover {
+  transform: scale(1.05);
+}
 @media screen and (min-width: 650px) {
   .container {
     display: flex;
