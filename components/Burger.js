@@ -12,8 +12,8 @@ const Burger = ({ products }) => {
           <div key={product.id} className={styles.product}>
             <Image
               src={product.productImg}
-              width={300}
-              height={300}
+              width={200}
+              height={200}
               alt="product"
             />
             <h1>{product.title}</h1>

@@ -12,8 +12,8 @@ const Sharwarma = ({ products }) => {
           <div key={product.id} className={styles.product}>
             <Image
               src={product.productImg}
-              width={100}
-              height={100}
+              width={200}
+              height={200}
               alt="product"
             />
             <h1>{product.title}</h1>
