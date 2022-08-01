@@ -32,9 +32,8 @@ const Cart = () => {
         router.push(`/orders/${response.data.id}`);
         dispatch(reset());
       }
-      console.log("response", response);
     } catch (error) {
-      console.log(error);
+      return error.message;
     }
   };
 
@@ -85,7 +84,6 @@ const Cart = () => {
                 method: 1,
                 status: 1,
               });
-              console.log(details);
             });
           }}
         />
@@ -123,7 +121,7 @@ const Cart = () => {
                     </div>
                   </td>
                   <td className={styles.tableBodyData}>{product.title}</td>
-                  <td className={styles.tableBodyData}>{product.price}</td>
+                  <td className={styles.tableBodyData}>${product.price}</td>
                   <td className={styles.tableBodyData}>
                     <span className={styles.extracont}>
                       {product.extras.map((extra) => (
@@ -135,7 +133,7 @@ const Cart = () => {
                   </td>
                   <td className={styles.tableBodyData}>{product.quantity}</td>
                   <td className={styles.tableBodyData}>
-                    {product.price * product.quantity}
+                    ${product.price * product.quantity}
                   </td>
                 </tr>
               ))}

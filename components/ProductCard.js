@@ -1,7 +1,6 @@
 import ProductList from "./ProductList";
 
 const ProductCard = ({ data }) => {
-  console.log("product", data);
   return (
     <div>
       {data.map((product) => (

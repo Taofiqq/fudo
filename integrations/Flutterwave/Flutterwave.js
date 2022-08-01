@@ -5,7 +5,6 @@ import styles from "../../styles/Flutterwave.module.css";
 
 const Flutterwave = ({ createOrder }) => {
   const amount = useSelector((state) => state.cart.total);
-  console.log(amount, "flutter");
   const config = {
     public_key: "FLWPUBK_TEST-ff8cfc219a3d59782d7f38a2c57c93c6-X",
     tx_ref: Date.now(),
@@ -38,7 +37,6 @@ const Flutterwave = ({ createOrder }) => {
         }),
           handleFlutterPayment({
             callback: (response) => {
-              console.log(response);
               closePaymentModal(); // this will close the modal programmatically
             },
             onClose: () => {},

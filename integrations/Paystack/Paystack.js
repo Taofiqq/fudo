@@ -12,7 +12,6 @@ const Paystack = ({ createOrder }) => {
     amount: amount * 100,
     email: "tao@gmail.com",
     onSuccess: (res) => {
-      console.log(res);
       createOrder({
         customer: "Taofiq Aiyelabegan",
         address: "LakeVille NY",

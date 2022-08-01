@@ -13,7 +13,7 @@ const Order = ({ data }) => {
     if (index === 1) return styles.pending;
     if (index > 1) return styles.undone;
   };
-  console.log(data);
+
   return (
     <div className={styles.orderContainer}>
       <h1>Here is the Details of where your Order will be delivered</h1>

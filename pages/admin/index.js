@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Admin = ({ products, orders }) => {
   const cart = useSelector((state) => state.cart);
-  // console.log(cart.products);
   const [productsCount, setProductsCount] = React.useState(products);
   const [ordersCount, setOrdersCount] = React.useState(orders);
   const status = ["Preparing", "En Route", "Delivered"];
@@ -23,9 +22,8 @@ const Admin = ({ products, orders }) => {
 
   const handleStatus = async (id) => {
     const item = ordersCount.filter((order) => order.id === id)[0];
-    console.log(item);
+
     const currentStatus = item.status;
-    console.log(currentStatus);
 
     try {
       const res = await axios.put(`/api/orders/${id}`, {

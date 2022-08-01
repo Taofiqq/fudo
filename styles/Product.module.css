@@ -49,9 +49,8 @@
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
-
 .buttonSizes:hover {
   transform: scale(1.05);
 }
