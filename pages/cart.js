@@ -127,7 +127,9 @@ const Cart = () => {
                   <td className={styles.tableBodyData}>
                     <span className={styles.extracont}>
                       {product.extras.map((extra) => (
-                        <span key={extra.id}>{extra.text}</span>
+                        <span key={extra.id} className={styles.extraText}>
+                          {extra.text} {","}
+                        </span>
                       ))}
                     </span>
                   </td>
@@ -166,7 +168,7 @@ const Cart = () => {
                 <ButtonWrapper currency={currency} showSpinner={false} />
               </PayPalScriptProvider>
               <Flutterwave createOrder={createOrder} />
-              <Paystack />
+              <Paystack createOrder={createOrder} />
               <button
                 onClick={() => setOpen(false)}
                 className={styles.checkoutBtn}

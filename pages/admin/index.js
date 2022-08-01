@@ -7,10 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Admin = ({ products, orders }) => {
   const cart = useSelector((state) => state.cart);
-  console.log(cart.products);
+  // console.log(cart.products);
   const [productsCount, setProductsCount] = React.useState(products);
   const [ordersCount, setOrdersCount] = React.useState(orders);
-  const status = ["Pending", "Processing", "Delivered", "Cancelled"];
+  const status = ["Preparing", "En Route", "Delivered"];
+
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(`/api/products/${id}`);
@@ -22,7 +23,9 @@ const Admin = ({ products, orders }) => {
 
   const handleStatus = async (id) => {
     const item = ordersCount.filter((order) => order.id === id)[0];
+    console.log(item);
     const currentStatus = item.status;
+    console.log(currentStatus);
 
     try {
       const res = await axios.put(`/api/orders/${id}`, {
@@ -102,10 +105,10 @@ const Admin = ({ products, orders }) => {
             </tr>
           </thead>
           {ordersCount.map((order) => (
-            <tbody key={order.id} className={styles.tableBody}>
+            <tbody key={order?.id} className={styles.tableBody}>
               <tr className={styles.tableBodyRow}>
                 <td className={styles.tableBodyData}>
-                  {order.id.slice(0, 10)}...
+                  {order?.id.slice(0, 10)}...
                 </td>
                 <td className={styles.tableBodyData}>{order.customer}</td>
                 <td className={styles.tableBodyData}>${order.total}</td>
@@ -121,7 +124,7 @@ const Admin = ({ products, orders }) => {
                   <button className={styles.btn}>{status[order.status]}</button>
                   <button
                     className={styles.btn}
-                    onClick={() => handleStatus(order.id)}
+                    onClick={() => handleStatus(order?.id)}
                   >
                     Next
                   </button>

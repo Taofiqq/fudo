@@ -31,7 +31,7 @@ const Footer = () => {
           </button>
         </div>
       </section>
-      <hr className={styles.line} />
+      {/* <hr className={styles.line} /> */}
 
       <section className={styles.footerContent}>
         <div>

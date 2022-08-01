@@ -16,7 +16,7 @@ const Order = ({ data }) => {
   console.log(data);
   return (
     <div className={styles.orderContainer}>
-      <h1>Here is the Details of your Order</h1>
+      <h1>Here is the Details of where your Order will be delivered</h1>
 
       <table className={styles.orderTable}>
         <thead className={styles.tableHead}>

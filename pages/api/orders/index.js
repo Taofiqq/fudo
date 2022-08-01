@@ -43,6 +43,26 @@ export default async function handler(req, res) {
     }
   }
 
+  // update orders
+  if (method === "PUT") {
+    try {
+      const { id, status } = req.body;
+
+      const orders = await prisma.orders.update({
+        where: {
+          id,
+        },
+        data: {
+          status,
+        },
+      });
+
+      res.status(200).json(orders);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
   // delete all orders
   if (method === "DELETE") {
     try {
